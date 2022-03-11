@@ -3,7 +3,7 @@
 ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/kcat-io/go-tagdog)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg)](http://copyfree.org)
 
-一个基于k8s clinet-go实现的容器镜像版本检查工具
+一个基于k8s client-go实现的容器镜像版本检查工具
 
 业务中有使用k8s部署和管理微服务，微服务的数量多了之后偶尔会出现因人工操作疏漏而导致版本错乱的现象。比如某个微服务临时要切到灰度版本，结果灰度执行完成后忘记切换回正式版本；再比如一些cronjob所使用的镜像版本可能落后于deployment中运行的版本（cronjob配置忘记更新镜像版本）。
 
