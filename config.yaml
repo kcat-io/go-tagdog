@@ -26,7 +26,7 @@ ignore:
     deployment::testpod.testcontainer5: "2022-03-10 00:00:00"
     deployment::testpod.testcontainer7: "2022-03-07 00:00:00"
     deployment::testpod.testcontainer9: "2022-03-10 00:00:00"
-    crontab::testpod.testcontainer: "" # 也可以不设置时间 将无限期忽略
+    cronjob::testpod.testcontainer: "" # 也可以不设置时间 将无限期忽略
 
 tagcheck:
   enable: true
