@@ -1,0 +1,36 @@
+# 配置kube config 路径
+kube_config: "/Users/kcat/.kube/config"
+# 配置目标集群中的namespace
+namespace: "default"
+#配置调用k8s接口的超时时间，单位：秒
+timeout: 600
+
+# 配置需要启用的规则插件，alarm建议配置在最前，ignore建议配置在最后
+# 每个插件都可以定制（前序逻辑）和（后续逻辑），系统将按照插件顺序执行（前序逻辑）再逆序执行（后续逻辑）
+# 其中alarm在（后续逻辑）中实现了告警输出
+plugins:
+  - alarm
+  - tagcheck
+  - ignore
+
+# 以下是各插件的自主配置，由各插件自主解析和使用
+alarm:
+  enable: true
+
+ignore:
+  enable: true
+  list: # 类型::pod名称.container名称:屏蔽告警截止时间（在此时间之前 将忽略该container的告警）
+    deployment::testpod.testcontainer0: "2022-03-10 00:00:00"
+    deployment::testpod.testcontainer3: "2022-03-10 00:00:00"
+    deployment::testpod.testcontainer4: ""
+    deployment::testpod.testcontainer5: "2022-03-10 00:00:00"
+    deployment::testpod.testcontainer7: "2022-03-07 00:00:00"
+    deployment::testpod.testcontainer9: "2022-03-10 00:00:00"
+    crontab::testpod.testcontainer: "" # 也可以不设置时间 将无限期忽略
+
+tagcheck:
+  enable: true
+  list: # 检查使用以下镜像的容器tag是否正确
+    ccr.ccs.tencentyun.com/kcat/nginx: "latest"
+    ccr.ccs.tencentyun.com/kcat/typecho: "latest"
+  cronjob: true #检查cronjob所采用的镜像tag是否与deployment一致
