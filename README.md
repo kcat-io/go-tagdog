@@ -11,7 +11,15 @@
 
 可以把go-tagdog编译成镜像配置到k8s集群的cronjob中定期检查，提供预警。
 
+### 插件模式
+这里使用到插件组件，插件组件的介绍可以查阅这篇内容《[一个插件引擎，让自己的Go程序支持插件式扩展][go-plugin]》
+
+[go-plugin]: https://kcat.io/golang/go-plugin.html
+
+[![go-tagdog](https://kcat.io/usr/uploads/2022/03/3536862076.png)](https://kcat.io/)
+
 ### 配置内容
+目前实现了`tag检查`、`告警忽略`以及`告警`三个插件，其中`告警`插件偷了个懒只是直接Print了，其实可以按需扩展邮件、企业微信、钉钉等告警方式。各插件可配置的内容参考配置文件，均有注释说明。
 ```yaml
 # 配置kube config 路径
 kube_config: "/Users/kcat/.kube/config"
